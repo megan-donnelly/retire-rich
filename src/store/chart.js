@@ -23,11 +23,11 @@ const initialState = {
 };
 
 // Reducer
-export default function(graph = initialState, action) {
+export default function(chart = initialState, action) {
   switch (action.type) {
     case RAN_CALCULATOR:
       return { data: action.data, labels: action.labels };
     default:
-      return graph;
+      return chart;
   }
 }

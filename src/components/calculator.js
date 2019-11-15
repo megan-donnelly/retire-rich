@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { runCalculator } from '../store/data';
+import { runCalculator } from '../store/chart';
 import SavingsChart from './savingsChart';
 
 class Calculator extends Component {
@@ -11,7 +11,7 @@ class Calculator extends Component {
       age: 25,
       salary: 50000,
       salaryGrowth: 2,
-      expenses: 36000,
+      expenses: 3000,
       expensesGrowth: 1,
       retirementAge: 65,
       status: 'single',
@@ -206,7 +206,9 @@ class Calculator extends Component {
             Run Calculator
           </button>
         </form>
-        <SavingsChart data={this.props.data} labels={this.props.labels} />
+        {this.props.data.length && (
+          <SavingsChart data={this.props.data} labels={this.props.labels} />
+        )}
       </div>
     );
   }
@@ -214,8 +216,8 @@ class Calculator extends Component {
 
 const mapState = state => {
   return {
-    data: state.data,
-    labels: state.labels,
+    data: state.chart.data,
+    labels: state.chart.labels,
   };
 };
 
