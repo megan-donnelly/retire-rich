@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { runCalculator } from '../store/calculator';
+import SavingsChart from './savingsChart';
 
 class Calculator extends Component {
   constructor(props) {
@@ -138,13 +139,16 @@ class Calculator extends Component {
             Run Calculator
           </button>
         </form>
+        <SavingsChart data={this.props.data} />
       </div>
     );
   }
 }
 
 const mapState = state => {
-  return {};
+  return {
+    data: state.data,
+  };
 };
 
 const mapDispatch = dispatch => {

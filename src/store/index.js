@@ -4,8 +4,9 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import calculator from './calculator';
+import data from './data';
 
-const reducer = combineReducers({ calculator });
+const reducer = combineReducers({ calculator, data });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

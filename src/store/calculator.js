@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 // Action Types
 const RUN_CALCULATOR = 'RUN_CALCULATOR';
 
@@ -23,7 +21,6 @@ const initialState = {
 export default function(calculator = initialState, action) {
   switch (action.type) {
     case RUN_CALCULATOR:
-      console.log(`RUN_CALCULATOR`, action.calculator);
       return action.calculator;
     default:
       return calculator;
