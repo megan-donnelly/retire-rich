@@ -13,13 +13,22 @@ code {
     monospace;
 }
 
-#home {
+.nav-link {
+  color: #bfbfbf;
+}
+
+.nav-link:hover {
+  color: whitesmoke;
+}
+
+#home,
+#calculator {
   text-align: center;
   padding: auto;
   padding: 10%;
 }
 
-#home h1 {
+.view-title {
   color: #575450;
   font: 'Roboto';
 }
@@ -36,6 +45,7 @@ button {
   border-radius: 5px;
   background-color: #575450;
   color: whitesmoke;
+  padding: 5px 10px;
 }
 
 #home button {

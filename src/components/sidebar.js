@@ -20,18 +20,18 @@ const Sidebar = props => (
     <div className="collapse bg-dark p-4" id="navbarToggleExternalContent">
       <ul className="nav flex-column">
         <li className="nav-item">
-          <Link to="/" className="nav-link active text-white">
-            Active
+          <Link to="/home" className="nav-link active">
+            Home
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/" className="nav-link text-white">
-            Link
+          <Link to="/calculator" className="nav-link">
+            Retirement Calculator
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/" className="nav-link text-white">
-            Link
+          <Link to="/profile" className="nav-link">
+            Profile
           </Link>
         </li>
       </ul>
