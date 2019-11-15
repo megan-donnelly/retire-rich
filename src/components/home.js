@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom';
 const Home = props => (
   <div id="home">
     <h1 className="view-title">Retire Rich</h1>
-    <img id="dollar-icon" src={require('./dollar-icon.png')} />
+    <img
+      id="dollar-icon"
+      alt="dollar icon"
+      src={require('./dollar-icon.png')}
+    />
     <Link to="/calculator">
       <button>Get Started</button>
     </Link>

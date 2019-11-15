@@ -1,4 +1,4 @@
-export default function(status = 'single', income = 50000) {
+export const getTaxRate = function(status = 'single', income = 50000) {
   const brackets = {
     // key is tax rate
     // values are max for bracket
@@ -17,4 +17,20 @@ export default function(status = 'single', income = 50000) {
     }
   }
   return 37;
-}
+};
+
+export const getDataPoints = function(calculatorInputs) {
+  const {
+    age,
+    salary,
+    salaryGrowth,
+    _401k,
+    expenses,
+    expensesGrowth,
+    retirementAge,
+    status,
+  } = calculatorInputs;
+  let dataPoints = [];
+  let ageLables = [];
+  const jumpSize = (retirementAge - age) / 10;
+};

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Chart from 'chart.js';
-import classes from './savingsChart.css';
+import classes from './LineGraph.module.css';
 
 class SavingsChart extends Component {
   constructor(props) {
@@ -25,6 +25,7 @@ class SavingsChart extends Component {
       },
       options: {
         //Customize chart options
+        responsive: true,
       },
     });
   }
