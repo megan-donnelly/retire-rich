@@ -10,16 +10,22 @@ class Calculator extends Component {
     this.state = {
       age: 25,
       salary: 50000,
-      growthRate: 2,
+      salaryGrowth: 2,
+      _401k: 6,
+      expenses: 36000,
+      expensesGrowth: 1,
       retirementAge: 65,
+      status: 'single',
     };
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
   changeHandler(evt) {
-    const newValue = Number(evt.target.value);
-    if (!isNaN(newValue)) {
-      this.setState({ [evt.target.name]: newValue });
+    const { name, value } = evt.target;
+    if (name === 'status') {
+      this.setState({ [name]: value });
+    } else if (!isNaN(Number(value))) {
+      this.setState({ [name]: Number(value) });
     }
   }
   submitHandler(evt) {
@@ -27,7 +33,10 @@ class Calculator extends Component {
     if (
       this.state.age &&
       this.state.salary &&
-      this.state.growthRate &&
+      this.state.salaryGrowth &&
+      this.state._401k &&
+      this.state.expenses &&
+      this.state.expensesGrowth &&
       this.state.retirementAge &&
       this.state.age < this.state.retirementAge
     ) {
@@ -38,7 +47,10 @@ class Calculator extends Component {
     if (
       this.state.age &&
       this.state.salary &&
-      this.state.growthRate &&
+      this.state.salaryGrowth &&
+      this.state._401k &&
+      this.state.expenses &&
+      this.state.expensesGrowth &&
       this.state.retirementAge &&
       this.state.age < this.state.retirementAge
     ) {
@@ -62,7 +74,6 @@ class Calculator extends Component {
               min={0}
               max={100}
               className="htmlForm-control"
-              placeholder="Enter your age"
               onChange={this.changeHandler}
               value={this.state.age}
               required
@@ -81,7 +92,6 @@ class Calculator extends Component {
               name="salary"
               min={0}
               className="htmlForm-control"
-              placeholder="Enter your salary"
               onChange={this.changeHandler}
               value={this.state.salary}
               required
@@ -91,24 +101,79 @@ class Calculator extends Component {
             )}
           </div>
           <div className="form-group">
-            <label htmlFor="growthRate" className="input-description">
+            <label htmlFor="salaryGrowth" className="input-description">
               <strong>Salary Growth Rate:</strong>
             </label>
             <input
               type="number"
-              id="growthRate"
-              name="growthRate"
+              id="salaryGrowth"
+              name="salaryGrowth"
               min={0}
               max={100}
               className="htmlForm-control"
-              placeholder="Estimated growth rate"
               onChange={this.changeHandler}
-              value={this.state.growthRate}
+              value={this.state.salaryGrowth}
               required
             />
-            {!this.state.growthRate && (
+            {!this.state.salaryGrowth && (
               <label className="validation">
                 Must enter a valid growth rate
+              </label>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="_401k" className="input-description">
+              <strong>Percent 401k Contribution:</strong>
+            </label>
+            <input
+              type="number"
+              id="_401k"
+              name="_401k"
+              min={0}
+              max={100}
+              className="htmlForm-control"
+              onChange={this.changeHandler}
+              value={this.state._401k}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="expenses" className="input-description">
+              <strong>Expenses:</strong>
+            </label>
+            <input
+              type="number"
+              id="expenses"
+              name="expenses"
+              min={0}
+              className="htmlForm-control"
+              onChange={this.changeHandler}
+              value={this.state.expenses}
+              required
+            />
+            {!this.state.expenses && (
+              <label className="validation">
+                Must enter a valid expenses amount
+              </label>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="expensesGrowth" className="input-description">
+              <strong>Expenses Growth Rate:</strong>
+            </label>
+            <input
+              type="number"
+              id="expensesGrowth"
+              name="expensesGrowth"
+              min={0}
+              className="htmlForm-control"
+              onChange={this.changeHandler}
+              value={this.state.expensesGrowth}
+              required
+            />
+            {!this.state.expensesGrowth && (
+              <label className="validation">
+                Must enter a valid expenses growth rate
               </label>
             )}
           </div>
@@ -123,7 +188,6 @@ class Calculator extends Component {
               min={0}
               max={100}
               className="htmlForm-control"
-              placeholder="Estimated retirement age"
               onChange={this.changeHandler}
               value={this.state.retirementAge}
               required
@@ -132,6 +196,28 @@ class Calculator extends Component {
               this.state.retirementAge <= this.state.age) && (
               <label className="validation">
                 Must enter a valid retirement age
+              </label>
+            )}
+          </div>
+          <div className="form-group input-group mb-3">
+            <label htmlFor="status" className="input-description">
+              <strong>Filling Status:</strong>
+            </label>
+            <select
+              className="htmlForm-control"
+              id="inputGroupSelect01"
+              name="status"
+              value="single"
+              onChange={this.changeHandler}
+            >
+              <option value="single">Single</option>
+              <option value="joint">Married, filling jointly</option>
+              <option value="separate">Married, filling separately</option>
+              <option value="head">Head of household</option>
+            </select>
+            {!this.state.status && (
+              <label className="validation">
+                Must enter a valid filling status
               </label>
             )}
           </div>

@@ -18,7 +18,7 @@ class SavingsChart extends Component {
         labels: ['Jan', 'Feb', 'March'],
         datasets: [
           {
-            label: 'Sales',
+            label: 'Cash Savings',
             data: [86, 67, 91],
           },
         ],

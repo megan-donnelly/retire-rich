@@ -13,8 +13,12 @@ export const runCalculator = calculator => ({
 const initialState = {
   age: 25,
   salary: 50000,
-  growthRate: 2,
+  salaryGrowth: 2,
+  _401k: 6,
+  expenses: 36000,
+  expensesGrowth: 1,
   retirementAge: 65,
+  status: 'single',
 };
 
 // Reducer
