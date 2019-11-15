@@ -14,7 +14,6 @@ const initialState = {
   age: 25,
   salary: 50000,
   salaryGrowth: 2,
-  _401k: 6,
   expenses: 36000,
   expensesGrowth: 1,
   retirementAge: 65,

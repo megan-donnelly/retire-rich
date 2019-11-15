@@ -10,16 +10,16 @@ class SavingsChart extends Component {
   chartRef = React.createRef();
   componentDidMount() {
     const myChartRef = this.chartRef.current.getContext('2d');
-
+    const { data, labels } = this.props;
     new Chart(myChartRef, {
       type: 'line',
       data: {
         //Bring in data
-        labels: ['Jan', 'Feb', 'March'],
+        labels: labels,
         datasets: [
           {
             label: 'Cash Savings',
-            data: [86, 67, 91],
+            data: data,
           },
         ],
       },
@@ -39,9 +39,7 @@ class SavingsChart extends Component {
 }
 
 const mapState = state => {
-  return {
-    data: state.data,
-  };
+  return {};
 };
 
 const mapDispatch = dispatch => {

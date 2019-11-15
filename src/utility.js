@@ -24,7 +24,6 @@ export const getDataPoints = function(calculatorInputs) {
     age,
     salary,
     salaryGrowth,
-    _401k,
     expenses,
     expensesGrowth,
     retirementAge,
@@ -32,5 +31,42 @@ export const getDataPoints = function(calculatorInputs) {
   } = calculatorInputs;
   let dataPoints = [];
   let ageLables = [];
-  const jumpSize = (retirementAge - age) / 10;
+
+  // cashSavings = (salary * getTaxRate(status, salary) / 100 ) - expenses
+  let currentAge = age;
+  let currentSalary = salary;
+  let currentExpenses = expenses;
+
+  // calculate cash savings for every year
+  // from starting age until retirement
+  while (currentAge < retirementAge) {
+    const cashSavings =
+      (currentSalary * (100 - getTaxRate(status, currentSalary))) / 100 -
+      currentExpenses;
+
+    dataPoints.push(cashSavings);
+    ageLables.push(currentAge);
+
+    currentAge++;
+    currentSalary += (currentSalary * salaryGrowth) / 100;
+    currentExpenses += (currentExpenses * expensesGrowth) / 100;
+  }
+  // calculate cash saving for every year
+  // from retirement until savings is 0
+  let retirementSavings = dataPoints[dataPoints.length - 1];
+  while (retirementSavings > 0) {
+    retirementSavings -= currentExpenses;
+
+    if (retirementSavings < 0) {
+      dataPoints.push(0);
+    } else {
+      dataPoints.push(retirementSavings);
+    }
+    ageLables.push(currentAge);
+
+    currentAge++;
+    currentExpenses += (currentExpenses * expensesGrowth) / 100;
+  }
+
+  return { dataPoints, ageLables };
 };

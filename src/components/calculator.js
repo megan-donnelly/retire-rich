@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { runCalculator } from '../store/calculator';
+import { runCalculator } from '../store/data';
 import SavingsChart from './savingsChart';
 
 class Calculator extends Component {
@@ -11,7 +11,6 @@ class Calculator extends Component {
       age: 25,
       salary: 50000,
       salaryGrowth: 2,
-      _401k: 6,
       expenses: 36000,
       expensesGrowth: 1,
       retirementAge: 65,
@@ -34,7 +33,6 @@ class Calculator extends Component {
       this.state.age &&
       this.state.salary &&
       this.state.salaryGrowth &&
-      this.state._401k &&
       this.state.expenses &&
       this.state.expensesGrowth &&
       this.state.retirementAge &&
@@ -48,7 +46,6 @@ class Calculator extends Component {
       this.state.age &&
       this.state.salary &&
       this.state.salaryGrowth &&
-      this.state._401k &&
       this.state.expenses &&
       this.state.expensesGrowth &&
       this.state.retirementAge &&
@@ -120,22 +117,6 @@ class Calculator extends Component {
                 Must enter a valid growth rate
               </label>
             )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="_401k" className="input-description">
-              <strong>Percent 401k Contribution:</strong>
-            </label>
-            <input
-              type="number"
-              id="_401k"
-              name="_401k"
-              min={0}
-              max={100}
-              className="htmlForm-control"
-              onChange={this.changeHandler}
-              value={this.state._401k}
-              required
-            />
           </div>
           <div className="form-group">
             <label htmlFor="expenses" className="input-description">
@@ -225,7 +206,7 @@ class Calculator extends Component {
             Run Calculator
           </button>
         </form>
-        <SavingsChart data={this.props.data} />
+        <SavingsChart data={this.props.data} labels={this.props.labels} />
       </div>
     );
   }
@@ -234,6 +215,7 @@ class Calculator extends Component {
 const mapState = state => {
   return {
     data: state.data,
+    labels: state.labels,
   };
 };
 
