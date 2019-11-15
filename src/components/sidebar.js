@@ -1,0 +1,53 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+const Sidebar = props => (
+  <div id="sidebar" className="pos-f-t">
+    <nav className="navbar navbar-dark bg-dark">
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggleExternalContent"
+        aria-controls="navbarToggleExternalContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <div className="collapse bg-dark p-4" id="navbarToggleExternalContent">
+      <ul className="nav flex-column">
+        <li className="nav-item">
+          <Link to="/" className="nav-link active text-white">
+            Active
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/" className="nav-link text-white">
+            Link
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/" className="nav-link text-white">
+            Link
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </div>
+);
+
+/**
+ * CONTAINER
+ */
+const mapState = state => {
+  return {};
+};
+
+const mapDispatch = dispatch => {
+  return {};
+};
+
+export default connect(mapState, mapDispatch)(Sidebar);
