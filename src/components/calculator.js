@@ -21,6 +21,12 @@ class Calculator extends Component {
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
+  componentDidMount() {
+    const formInputs = JSON.parse(localStorage.getItem('form'));
+    if (formInputs) {
+      this.setState(formInputs);
+    }
+  }
   changeHandler(evt) {
     const { name, value } = evt.target;
     if (name === 'status') {
@@ -44,6 +50,7 @@ class Calculator extends Component {
     ) {
       this.props.getChart(this.state);
     }
+    window.localStorage.setItem('form', JSON.stringify(this.state));
   }
   disableBtnHelper() {
     if (
