@@ -8,6 +8,11 @@
       "type": "image/x-icon"
     },
     {
+      "src": "dollar-icon.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"

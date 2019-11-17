@@ -1,5 +1,8 @@
 {
   "name": "retire-rich",
+  "description": "Calcuate cash savings for retirement",
+  "homepage": "./",
+  "author": "Megan Donnelly <md2942@nyu.edu>",
   "version": "0.1.0",
   "main": "public/main.js",
   "private": true,
@@ -8,6 +11,7 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.9.3",
     "electron-is-dev": "^1.1.0",
+    "gh-pages": "^2.1.1",
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
@@ -24,11 +28,34 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postinstall": "install-app-deps",
+    "pack": "build --dir",
+    "dist": "build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none npm run start\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "build": {
+    "appId": "test1234",
+    "category": "finance",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,6 +76,7 @@
     "concurrently": "^5.0.0",
     "electron": "^7.1.1",
     "electron-builder": "^22.1.0",
+    "electron-packager": "^14.1.0",
     "wait-on": "^3.3.0"
   }
 }
