@@ -1,20 +1,26 @@
+import { getChartData } from './chart';
+
 // Action Types
-const RUN_CALCULATOR = 'RUN_CALCULATOR';
+const RAN_CALCULATOR = 'RUN_CALCULATOR';
 
 // Action Creators
-export const runCalculator = calculator => ({
-  type: RUN_CALCULATOR,
+const ranCalculator = calculator => ({
+  type: RAN_CALCULATOR,
   calculator,
 });
 
-// Thunk Creators (if necessary)
+// Thunk Creators
+export const runCalculator = calculator => dispatch => {
+  dispatch(ranCalculator(calculator));
+  dispatch(getChartData(calculator));
+};
 
 // Initial State
 const initialState = {
   age: 25,
   salary: 50000,
   salaryGrowth: 2,
-  expenses: 36000,
+  expenses: 43000,
   expensesGrowth: 1,
   returnRate: 6,
   retirementAge: 65,
@@ -25,7 +31,7 @@ const initialState = {
 // Reducer
 export default function(calculator = initialState, action) {
   switch (action.type) {
-    case RUN_CALCULATOR:
+    case RAN_CALCULATOR:
       return action.calculator;
     default:
       return calculator;

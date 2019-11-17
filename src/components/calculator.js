@@ -239,7 +239,7 @@ class Calculator extends Component {
               className="htmlForm-control"
               id="inputGroupSelect01"
               name="status"
-              value="single"
+              value={this.state.status}
               onChange={this.changeHandler}
             >
               <option value="single">Single</option>

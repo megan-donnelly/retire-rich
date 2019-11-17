@@ -66,7 +66,7 @@ class SavingsChart extends Component {
         datasets: [
           {
             yAxisID: 'y-axis-0',
-            label: 'Cash Savings',
+            label: 'Retirement Savings',
             data: data,
             backgroundColor: function(context) {
               var index = context.dataIndex;
@@ -88,6 +88,36 @@ class SavingsChart extends Component {
       options: {
         //Customize chart options
         responsive: true,
+        scales: {
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'Cash',
+              },
+              ticks: {
+                beginAtZero: true,
+                callback: function(value, index, values) {
+                  return (
+                    '$' +
+                    new Intl.NumberFormat('en-US', {
+                      style: 'decimal',
+                      currency: 'USD',
+                    }).format(value)
+                  );
+                },
+              },
+            },
+          ],
+          xAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'Age',
+              },
+            },
+          ],
+        },
       },
     });
     if (data.length) {
@@ -110,7 +140,7 @@ class SavingsChart extends Component {
 
     // keep track canvas position
     var pdfctx = pdfCanvas.getContext('2d');
-    // set background color to white
+    // set background color to white (default is black)
     pdfctx.fillStyle = 'white';
     pdfctx.fillRect(0, 0, reportPageWidth, reportPageHeight);
     var pdfctxX = 0;
