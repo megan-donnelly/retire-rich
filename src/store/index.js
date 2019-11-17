@@ -3,10 +3,9 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import calculator from './calculator';
 import chart from './chart';
 
-const reducer = combineReducers({ calculator, chart });
+const reducer = combineReducers({ chart });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
