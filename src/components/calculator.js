@@ -94,6 +94,7 @@ class Calculator extends Component {
               id="salary"
               name="salary"
               min={0}
+              step={1000}
               className="htmlForm-control"
               onChange={this.changeHandler}
               value={this.state.salary}
@@ -154,6 +155,7 @@ class Calculator extends Component {
               id="expenses"
               name="expenses"
               min={0}
+              step={1000}
               className="htmlForm-control"
               onChange={this.changeHandler}
               value={this.state.expenses}
@@ -174,6 +176,7 @@ class Calculator extends Component {
               id="expensesGrowth"
               name="expensesGrowth"
               min={0}
+              max={100}
               className="htmlForm-control"
               onChange={this.changeHandler}
               value={this.state.expensesGrowth}
@@ -254,14 +257,16 @@ class Calculator extends Component {
             Run Calculator
           </button>
         </form>
-        <SavingsChart />
+        {this.props.data.length ? <SavingsChart /> : <div></div>}
       </div>
     );
   }
 }
 
 const mapState = state => {
-  return {};
+  return {
+    data: state.chart.data,
+  };
 };
 
 const mapDispatch = dispatch => {

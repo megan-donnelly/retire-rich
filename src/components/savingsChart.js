@@ -14,14 +14,15 @@ Chart.controllers.NegativeTransparentLine = Chart.controllers.line.extend({
     var yScale = this.getScaleForId(this.getDataset().yAxisID);
 
     // figure out the pixels for these and the value 0
-    var top = yScale.getPixelForValue(max) || 10;
+    var top = yScale.getPixelForValue(max);
     var zero = yScale.getPixelForValue(0);
-    var bottom = yScale.getPixelForValue(min) || 100;
+    var bottom = yScale.getPixelForValue(min);
 
     // build a gradient that switches color at the 0 point
     var ctx = this.chart.chart.ctx;
     var gradient = ctx.createLinearGradient(0, top, 0, bottom);
     var ratio = Math.min((zero - top) / (bottom - top), 1);
+    if (ratio < 0) ratio = 0;
     gradient.addColorStop(0, 'rgba(54, 162, 235, 0.4)');
     gradient.addColorStop(ratio, 'rgba(54, 162, 235, 0.4)');
     gradient.addColorStop(ratio, 'rgba(255, 99, 132, 0.4)');
@@ -82,10 +83,14 @@ class SavingsChart extends Component {
         responsive: true,
       },
     });
+    if (data.length) {
+      const chart = document.getElementById('capture');
+      chart.scrollIntoView();
+    }
   }
   render() {
     return (
-      <div className={classes.graphContainer}>
+      <div id="capture" className={classes.graphContainer}>
         <canvas id="myChart" ref={this.chartRef} />
       </div>
     );
