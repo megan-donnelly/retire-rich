@@ -1,19 +1,19 @@
 import { getDataPoints } from '../utility.js';
 
 // Action Types
-const RAN_CALCULATOR = 'RAN_CALCULATOR';
+const GOT_CHART_DATA = 'GOT_CHART_DATA';
 
 // Action Creators
-const ranCalculator = (data, labels) => ({
-  type: RAN_CALCULATOR,
+const gotChartData = (data, labels) => ({
+  type: GOT_CHART_DATA,
   data,
   labels,
 });
 
 // Thunks
-export const runCalculator = formInputs => dispatch => {
+export const getChartData = formInputs => dispatch => {
   const { dataPoints, ageLables } = getDataPoints(formInputs);
-  dispatch(ranCalculator(dataPoints, ageLables));
+  dispatch(gotChartData(dataPoints, ageLables));
 };
 
 // initial state
@@ -25,7 +25,7 @@ const initialState = {
 // Reducer
 export default function(chart = initialState, action) {
   switch (action.type) {
-    case RAN_CALCULATOR:
+    case GOT_CHART_DATA:
       return { data: action.data, labels: action.labels };
     default:
       return chart;

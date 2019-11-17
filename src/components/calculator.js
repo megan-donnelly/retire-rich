@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { runCalculator } from '../store/chart';
+import { getChartData } from '../store/chart';
 import SavingsChart from './savingsChart';
 
 class Calculator extends Component {
@@ -42,7 +42,7 @@ class Calculator extends Component {
       this.state.retirementReturnRate &&
       this.state.age < this.state.retirementAge
     ) {
-      this.props.calculate(this.state);
+      this.props.getChart(this.state);
     }
   }
   disableBtnHelper() {
@@ -254,26 +254,19 @@ class Calculator extends Component {
             Run Calculator
           </button>
         </form>
-        {this.props.data.length ? (
-          <SavingsChart data={this.props.data} labels={this.props.labels} />
-        ) : (
-          <div></div>
-        )}
+        <SavingsChart />
       </div>
     );
   }
 }
 
 const mapState = state => {
-  return {
-    data: state.chart.data,
-    labels: state.chart.labels,
-  };
+  return {};
 };
 
 const mapDispatch = dispatch => {
   return {
-    calculate: inputs => dispatch(runCalculator(inputs)),
+    getChart: inputs => dispatch(getChartData(inputs)),
   };
 };
 

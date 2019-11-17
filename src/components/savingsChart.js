@@ -4,14 +4,24 @@ import Chart from 'chart.js';
 import classes from './LineGraph.module.css';
 
 class SavingsChart extends Component {
-  constructor(props) {
-    super(props);
-  }
   chartRef = React.createRef();
+  myLineChart = undefined;
   componentDidMount() {
+    this.buildChart();
+  }
+  componentDidUpdate() {
+    this.buildChart();
+  }
+  buildChart() {
     const myChartRef = this.chartRef.current.getContext('2d');
+
     const { data, labels } = this.props;
-    new Chart(myChartRef, {
+
+    if (this.myLineChart !== undefined) {
+      this.myLineChart.destroy();
+    }
+
+    this.myLineChart = new Chart(myChartRef, {
       type: 'line',
       data: {
         //Bring in data
@@ -39,11 +49,10 @@ class SavingsChart extends Component {
 }
 
 const mapState = state => {
-  return {};
+  return {
+    data: state.chart.data,
+    labels: state.chart.labels,
+  };
 };
 
-const mapDispatch = dispatch => {
-  return {};
-};
-
-export default connect(mapState, mapDispatch)(SavingsChart);
+export default connect(mapState)(SavingsChart);
