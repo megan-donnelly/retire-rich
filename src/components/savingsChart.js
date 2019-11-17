@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Chart from 'chart.js';
+import jsPDF from 'jspdf';
+
 import classes from './LineGraph.module.css';
 
 Chart.defaults.NegativeTransparentLine = Chart.helpers.clone(
@@ -34,6 +36,11 @@ Chart.controllers.NegativeTransparentLine = Chart.controllers.line.extend({
 });
 
 class SavingsChart extends Component {
+  constructor(props) {
+    super(props);
+
+    this.savePDF = this.savePDF.bind(this);
+  }
   chartRef = React.createRef();
   myLineChart = undefined;
   componentDidMount() {
@@ -88,10 +95,60 @@ class SavingsChart extends Component {
       chart.scrollIntoView();
     }
   }
+
+  savePDF() {
+    // get size of report page
+    var reportPageHeight = document.getElementById('capture').clientHeight;
+    var reportPageWidth = document.getElementById('capture').clientWidth;
+
+    // create a new canvas object that we will populate with all other canvas objects
+    var pdfCanvas = document.createElement('CANVAS');
+
+    pdfCanvas.setAttribute('id', 'canvaspdf');
+    pdfCanvas.setAttribute('height', reportPageHeight);
+    pdfCanvas.setAttribute('width', reportPageWidth);
+
+    // keep track canvas position
+    var pdfctx = pdfCanvas.getContext('2d');
+    // set background color to white
+    pdfctx.fillStyle = 'white';
+    pdfctx.fillRect(0, 0, reportPageWidth, reportPageHeight);
+    var pdfctxX = 0;
+    var pdfctxY = 0;
+    var buffer = 100;
+
+    // for each chart.js chart
+    [...document.getElementsByTagName('canvas')].forEach(function(el, idx) {
+      // get the chart height/width
+      var canvasHeight = el.clientHeight;
+      var canvasWidth = el.clientWidth;
+
+      // draw the chart into the new canvas
+      pdfctx.drawImage(el, pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+      pdfctxX += canvasWidth + buffer;
+
+      // our report page is in a grid pattern so replicate that in the new canvas
+      if (idx % 2 === 1) {
+        pdfctxX = 0;
+        pdfctxY += canvasHeight + buffer;
+      }
+    });
+
+    // create new pdf and add our new canvas as an image
+    var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+    pdf.addImage(pdfCanvas, 'PNG', 0, 0);
+
+    // download the pdf
+    pdf.save('retirerich_savings.pdf');
+  }
+
   render() {
     return (
-      <div id="capture" className={classes.graphContainer}>
-        <canvas id="myChart" ref={this.chartRef} />
+      <div>
+        <div id="capture" className={classes.graphContainer}>
+          <canvas id="myChart" ref={this.chartRef} />
+        </div>
+        <button onClick={this.savePDF}>Save as PDF</button>
       </div>
     );
   }
