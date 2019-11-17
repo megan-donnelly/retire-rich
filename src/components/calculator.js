@@ -11,7 +11,7 @@ class Calculator extends Component {
       age: 25,
       salary: 50000,
       salaryGrowth: 2,
-      expenses: 30000,
+      expenses: 43000,
       expensesGrowth: 1,
       returnRate: 6,
       retirementAge: 65,
