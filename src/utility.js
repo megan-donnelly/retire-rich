@@ -11,7 +11,7 @@ export const getTaxRate = function(status = 'single', income = 50000) {
     // 37: {} --> Highest tax bracket
   };
   for (let rate in brackets) {
-    const max = rate[status];
+    const max = brackets[rate][status];
     if (income <= max) {
       return Number(rate);
     }
@@ -26,7 +26,9 @@ export const getDataPoints = function(calculatorInputs) {
     salaryGrowth,
     expenses,
     expensesGrowth,
+    returnRate,
     retirementAge,
+    retirementReturnRate,
     status,
   } = calculatorInputs;
   let dataPoints = [];
@@ -36,11 +38,17 @@ export const getDataPoints = function(calculatorInputs) {
   let currentAge = age;
   let currentSalary = salary;
   let currentExpenses = expenses;
+  let cashSavings = 0;
 
   // calculate cash savings for every year
   // from starting age until retirement
   while (currentAge < retirementAge) {
-    const cashSavings =
+    // add rate of return to total savings if not negative
+    if (cashSavings > 0) {
+      cashSavings += (cashSavings * returnRate) / 100;
+    }
+    // add current years savings to total savings
+    cashSavings +=
       (currentSalary * (100 - getTaxRate(status, currentSalary))) / 100 -
       currentExpenses;
 
@@ -53,8 +61,12 @@ export const getDataPoints = function(calculatorInputs) {
   }
   // calculate cash saving for every year
   // from retirement until savings is 0
+
   let retirementSavings = dataPoints[dataPoints.length - 1];
-  while (retirementSavings > 0) {
+  while (retirementSavings > 0 && currentAge <= 100) {
+    // add retirement rate of return to total savings
+    retirementSavings += (retirementSavings * retirementReturnRate) / 100;
+    // remove expenses from total savings
     retirementSavings -= currentExpenses;
 
     if (retirementSavings < 0) {
@@ -67,6 +79,5 @@ export const getDataPoints = function(calculatorInputs) {
     currentAge++;
     currentExpenses += (currentExpenses * expensesGrowth) / 100;
   }
-
   return { dataPoints, ageLables };
 };

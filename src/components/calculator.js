@@ -11,9 +11,11 @@ class Calculator extends Component {
       age: 25,
       salary: 50000,
       salaryGrowth: 2,
-      expenses: 3000,
+      expenses: 30000,
       expensesGrowth: 1,
+      returnRate: 6,
       retirementAge: 65,
+      retirementReturnRate: 2,
       status: 'single',
     };
     this.changeHandler = this.changeHandler.bind(this);
@@ -33,9 +35,11 @@ class Calculator extends Component {
       this.state.age &&
       this.state.salary &&
       this.state.salaryGrowth &&
+      this.state.returnRate &&
       this.state.expenses &&
       this.state.expensesGrowth &&
       this.state.retirementAge &&
+      this.state.retirementReturnRate &&
       this.state.age < this.state.retirementAge
     ) {
       this.props.calculate(this.state);
@@ -46,9 +50,11 @@ class Calculator extends Component {
       this.state.age &&
       this.state.salary &&
       this.state.salaryGrowth &&
+      this.state.returnRate &&
       this.state.expenses &&
       this.state.expensesGrowth &&
       this.state.retirementAge &&
+      this.state.retirementReturnRate &&
       this.state.age < this.state.retirementAge
     ) {
       return false;
@@ -119,6 +125,27 @@ class Calculator extends Component {
             )}
           </div>
           <div className="form-group">
+            <label htmlFor="returnRate" className="input-description">
+              <strong>Rate of Return:</strong>
+            </label>
+            <input
+              type="number"
+              id="returnRate"
+              name="returnRate"
+              min={0}
+              max={100}
+              className="htmlForm-control"
+              onChange={this.changeHandler}
+              value={this.state.returnRate}
+              required
+            />
+            {!this.state.returnRate && (
+              <label className="validation">
+                Must enter a valid rate of return
+              </label>
+            )}
+          </div>
+          <div className="form-group">
             <label htmlFor="expenses" className="input-description">
               <strong>Expenses:</strong>
             </label>
@@ -180,6 +207,27 @@ class Calculator extends Component {
               </label>
             )}
           </div>
+          <div className="form-group">
+            <label htmlFor="retirementReturnRate" className="input-description">
+              <strong>Retirement Rate of Return:</strong>
+            </label>
+            <input
+              type="number"
+              id="retirementReturnRate"
+              name="retirementReturnRate"
+              min={0}
+              max={100}
+              className="htmlForm-control"
+              onChange={this.changeHandler}
+              value={this.state.retirementReturnRate}
+              required
+            />
+            {!this.state.retirementReturnRate && (
+              <label className="validation">
+                Must enter a valid retirement rate of return
+              </label>
+            )}
+          </div>
           <div className="form-group input-group mb-3">
             <label htmlFor="status" className="input-description">
               <strong>Filling Status:</strong>
@@ -206,8 +254,10 @@ class Calculator extends Component {
             Run Calculator
           </button>
         </form>
-        {this.props.data.length && (
+        {this.props.data.length ? (
           <SavingsChart data={this.props.data} labels={this.props.labels} />
+        ) : (
+          <div></div>
         )}
       </div>
     );

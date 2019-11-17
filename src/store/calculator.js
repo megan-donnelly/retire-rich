@@ -16,7 +16,9 @@ const initialState = {
   salaryGrowth: 2,
   expenses: 36000,
   expensesGrowth: 1,
+  returnRate: 6,
   retirementAge: 65,
+  retirementReturnRate: 2,
   status: 'single',
 };
 
