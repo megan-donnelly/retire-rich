@@ -1,68 +1,93 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Retire Rich
 
-## Available Scripts
+Retire Rich is 4-day solo project aimed at creating a calculator that projects how long cash and 401k savings will last after retirement.
 
-In the project directory, you can run:
+Visit [Retire Rich](https://megan-donnelly.github.io/retire-rich/) to try it out!
 
-### `yarn start`
+## Table of Contents
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Retire Rich](#Retire-Rich)
+- [Table of Contents](#Table-of-Contents)
+- [Download](#Download)
+- [Author](#Author)
+  - [Megan Donnelly](#Megan-Donnelly)
+- [Tech Stack](#Tech-Stack)
+  - [React](#React)
+  - [Redux](#Redux)
+  - [Chart.js](#Chart.js)
+  - [Electron](#Electron)
+- [Examples](#Examples)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Download
 
-### `yarn test`
+Step by step guide for downloading repo:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+cd <directory you want to download to>
 
-### `yarn build`
+git clone https://github.com/megan-donnelly/retire-rich.git
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In the terminal:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm run electron-dev
 
-### `yarn eject`
+Either:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Use the desktop Retire Rich application
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Or go to http://localhost:3000 to use Retire Rich!
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Author
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### `Megan Donnelly`
 
-## Learn More
+Github: https://github.com/megan-donnelly
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+LinkedIn: https://www.linkedin.com/in/megan-donnelly1/
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Tech Stack
 
-### Code Splitting
+Technologies used in this project:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### `React`
 
-### Analyzing the Bundle Size
+https://reactjs.org/
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- React is a JavaScript library for building user interfaces.
 
-### Making a Progressive Web App
+- React will efficiently update and render only the components that need to be rerendered.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- React is component-based and allows for each component to manage their own state.
 
-### Advanced Configuration
+### `Redux`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+https://redux.js.org/
 
-### Deployment
+- Redux is an open-source JavaScript library for state management.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- Redux works together with React Native and Node to build complex user interfaces and retrieve data from the database, while easily managing state.
 
-### `yarn build` fails to minify
+### `Chart.js`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+https://www.chartjs.org/
+
+- Chart.js is an easy way to include animated, interactive graphs on your website for free.
+
+### `Electron`
+
+https://electronjs.org/
+
+- Electron allows for the development of desktop GUI applications using web technologies.
+
+- Electron combines the Chromium rendering engine and the Node.js runtime.
+
+## Examples
+
+<img src='https://github.com/megan-donnelly/retire-rich/blob/master/public/home.png' width='800' />
+
+<img src='https://github.com/megan-donnelly/retire-rich/blob/master/public/calculator.png' width='800' />
+
+<img src='https://github.com/megan-donnelly/retire-rich/blob/master/public/chart.png' width='800' />
